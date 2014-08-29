@@ -1,0 +1,64 @@
+<html>
+
+<head>
+<title>Device Status DB</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body>
+
+	<div id="page-wrap">
+		<h1>Inventory Database</h1><br><br>
+		<form action="#" method="POST">
+				
+		<b>Device :</b> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <input type="text" name="devicename" size=30><br><br>
+                <br>
+		
+		<b>Description:</b> &nbsp; &nbsp;
+                <textarea name="description" cols="50" rows="5" >
+                </textarea><br><br>
+
+	<!--	<b>Date:</b> &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+                <input type="datetime-local" name="date" size=30 > <br><br><br> -->
+
+                <b>Password :</b>&nbsp; &nbsp; &nbsp; &nbsp;
+                <input type="password" name="pass" size=30><br><br>
+                <br>
+
+                <br>
+                <br>
+		
+		<input type="radio" name="select" value="add">
+		<b>Add Entry</b> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+
+		<input type="checkbox" name="replace" value="1"> Replace existing entry<br>	
+
+		<input type="radio" name="select" value="query">
+		<b>Query Entry</b><br>
+
+		<input type="radio" name="select" value="remove">
+                <b>Remove Entry</b><br>
+                <br>
+	
+		<input type="submit">
+
+		</form>
+
+		<br><br><br> <h3><a href="http://jsinix.com/scripts/DeviceHandler.txt" target="_blank">Code</a> </h3>
+
+<!--		<p>
+                <br><br><br>
+                       Note:<br><br>
+
+                       * When replacing the description of existing device, select 'Add entry' and <br>&nbsp;&nbsp; 'Replace existing entry' and provide the password.</span> <br>
+                       * When deleting entry, provide device name and password.<br>
+                       * Querying only needs device name.<br>
+                         &nbsp;&nbsp; You can use curl to query as well. eg:<br>
+                         &nbsp;&nbsp; curl -s --data "devicename=xxyyzz01&select=query" <br>&nbsp;&nbsp; http://jsinix.com/cgi-bin/DeviceHandler.cgi <br>
+                </p> -->
+	</div>	
+		
+</body>
+</html>
