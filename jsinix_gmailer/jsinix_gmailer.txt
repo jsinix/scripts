@@ -1,0 +1,56 @@
+#!/usr/bin/perl
+# This is a commad line script to send email from
+# gmail account. You can cange the SMTP sever so
+# this script can be used to login into any domain
+# apart from gmail.
+use strict;
+use warnings;
+use Net::SMTP::TLS;
+# There will be a bug using the Net::SMTP::TLS module
+# So the fix i found here:
+# http://crunchbang.org/forums/viewtopic.php?pid=361299
+# invalid SSL_version specified at /usr/share/perl5/IO/Socket/SSL.pm line 332
+# replace this: m{^(!?)(?:(SSL(?:v2|v3|v23|v2/3))|(TLSv1[12]?))$}i
+# with this: m{^(!?)(?:(SSL(?:v2|v3|v23|v2/3))|(TLSv1[12]?))}i
+use Term::ReadKey;
+
+print "\nLogin ID: ";
+my $emaillogin = <STDIN>;
+chomp($emaillogin);
+
+print "Password: ";
+ReadMode('noecho');
+chomp(my $password = <STDIN>);
+ReadMode(0);
+
+print "\nMail To: ";
+my $emailto = <STDIN>;
+chomp($emailto);
+
+print "\nBody: ";
+my $emailbody = <STDIN>;
+chomp($emailbody);
+
+my $mailer = new Net::SMTP::TLS(
+    'smtp.gmail.com',
+    Hello   =>      'smtp.gmail.com',
+    Port    =>      587,
+    User    =>      $emaillogin,
+    Subject =>      'Subject',
+    Password=>      $password);
+$mailer->mail($emailto);
+$mailer->to($emailto);
+#$mailer->subject('test');
+$mailer->data;
+$mailer->datasend($emailbody);
+$mailer->dataend;
+$mailer->quit;
+
+
+# This is a testing example.
+
+#root@jsinix:~# ./jsinix_gmailer.pl
+#Login ID: jsinix.tester@gmail.com
+#Password:
+#Mail To: jsinix.tester@gmail.com
+#Body: This is to test that email is sent from jsinix.tester@gmail.com account.
