@@ -52,6 +52,10 @@ my $encryptedmsg = '';
 my $enckey3;
 my $emailbodyplain2;
 
+# This is the main control section where 
+# the respective modules are called from.
+# Ideally its good not to declare any 
+# module in this.
 while ($choice ne '5') {
 	START:
 	system("clear");
@@ -117,8 +121,14 @@ while ($choice ne '5') {
                 }		
 
 	}
+# The while loop ends here.
 }
 
+# This module can connect to the 
+# servers of google/gmail using POP3
+# There is one more module named
+# mail_check_imap that you can leverage
+# IMAP to check the emails.
 sub mail_check_pop { 
 	$cgi = new CGI;
 
@@ -163,7 +173,10 @@ sub mail_check_pop {
 
 }
 
-mail_send();
+# This module is used to send emails
+# from ur gmail account. We connect to 
+# the SMTP server of gmail using the credintials
+# and send email to anyone.
 sub mail_send {
 
 	print "\n\tLogin ID: ";
@@ -212,6 +225,8 @@ sub mail_send {
 		print "\n\tEmail sent.";
 }
 
+# This module does the function of encryption.
+# Uses Symmetric encryption.
 sub mail_encrypt {
 
         print "\n\n\tEncrypt message\n\n";
@@ -228,6 +243,9 @@ sub mail_encrypt {
 
 }
 
+# This sections is used to decrypt the 
+# encrypted message using the same symmetric
+# key that was used to encrypt.
 sub mail_decrypt {
 	
 	print "\n\n\tDecrypt message\n\n";
@@ -243,6 +261,7 @@ sub mail_decrypt {
 	print "\n\tDecrypted message: "; print $decryptedmsg1;
 }
 
+# Gets the username and returns it.
 sub get_user {
    
 	my $emaillogin = <STDIN>;
@@ -251,6 +270,7 @@ sub get_user {
 	return $emaillogin;
 }
 
+# Gets the password without echoing it on the STDOUT.
 sub get_pass {
 
 	ReadMode('noecho');
@@ -260,6 +280,8 @@ sub get_pass {
 	return $password;
 }
 
+# This is the module to check email using 
+# IMAP.
 sub mail_check_imap {
 
 	my ($uname3, $pass3) = get_credentials();
@@ -273,6 +295,8 @@ sub mail_check_imap {
 	or die "\n\tCould not connect to server, terminating...\n";
 }
 
+# Gets the body for the email. Can be used to 
+# get and return any string/text.
 sub get_body {
  
         my $emailbody = <STDIN>;
@@ -283,6 +307,7 @@ sub get_body {
 
 $crypt = Crypt::Lite->new( debug => 0, encoding => 'hex8' );
 
+# This section returns body after encryption.
 sub encrypt_body {
 	
 	my ($pbody1, $epass1) = $_;
@@ -292,6 +317,7 @@ sub encrypt_body {
 	return $encrypted;
 }
 
+# This section decrypts the text.
 sub decrypt_body {
 
         my ($pbody2, $epass2) = $_;
