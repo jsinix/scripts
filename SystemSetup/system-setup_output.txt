@@ -1,0 +1,52 @@
+This is the output of the script. 
+
+root@M14XR2:~/scripts# ./setup_jsinix.py
+         _     _       _
+        (_)   (_)     (_)
+         _ ___ _ _ __  ___  __
+        | / __| | '_ \| \ \/ /
+        | \__ \ | | | | |>  <
+        | |___/_|_| |_|_/_/\_\.
+       _/ |
+      |__/
+
+
+
+Author: jsinix(jsinix.1337@gmail.com)
+
+This script is written to expidite the process of initial system configuration
+(specifically Ubuntu). These initial things include basic setup, securing the
+system(firewall), updating it etc. I have not tested this with any distro but
+this can be modified to suit your need.Its preferrable you run this on new
+system as it overwrite some files.
+
+Should we start ?(y/n) y
+
+
+(+) Setting hostname
+(-) Hostname: M14XR2
+(+) Hostname set
+
+Current default time zone: 'America/Toronto'
+Local time is now:      Sat Nov 29 20:46:24 EST 2014.
+Universal Time is now:  Sun Nov 30 01:46:24 UTC 2014.
+
+
+(+) Timezone set
+(+) Current date: 2014-11-29 20:46:24.359840
+
+(+) Looks like system is connected to internet.
+(+) Updating repository
+(+) Update complete
+(+) Installing updates
+(+) Complete
+
+(+) Installing Fail2ban
+(+) Restarting Fail2ban
+(+) Fail2ban running
+
+(+) Installing firewall
+(+) Firewall is running
+(+) Setting up firewall on startup
+
+Restart the system(recommended) !
