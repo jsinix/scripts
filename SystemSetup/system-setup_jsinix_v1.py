@@ -24,8 +24,8 @@ Disclaimer = """\
 
 This script is written to expidite the process of initial system configuration
 (specifically Ubuntu). These initial things include basic setup, securing the
-system(firewall), updating it etc. I have not tested this with any distro but
-this can be modified to suit your need.Its preferrable you run this on new
+system(firewall), updating it etc. I have not tested this with any other distro 
+but this can be modified to suit your need.Its preferrable you run this on new
 system as it overwrite some files.
 """
 
