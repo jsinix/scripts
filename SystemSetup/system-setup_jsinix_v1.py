@@ -75,7 +75,7 @@ def update_setup():
     os.system("apt-get update > /dev/null")
     print "(+) Update complete"
     print "(+) Installing updates"
-    os.system("apt-get upgrade > /dev/null")
+    os.system("apt-get upgrade -y > /dev/null")
     print "(+) Complete"
 
 def fail2ban_setup():
@@ -145,4 +145,4 @@ if(my_user != 'root'):
 
 else:
     controller()
-    print "\nRestart the system(recommended) !"
+    print "\n(+) Restart the system(recommended) !"
