@@ -16,12 +16,11 @@
 # CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 #!/usr/bin/python
+#This script if used with a cronjob can be useful.
 import requests
 from netaddr import *
 import subprocess, getpass
 import sys, os, datetime
-
-#This script if used with a cronjob can be useful.
 
 Welcome = """\
          _     _       _
@@ -62,12 +61,10 @@ COMMIT
 """
 
 ip_list = []
-
 all_links = ["http://www.spamhaus.org/drop/drop.txt"]
 
 def get_spamhaus_ip(link):
     f = requests.get(link)
-
     for each in f.text.split():
         try:    
 	    temp_net = IPNetwork(each)
@@ -75,24 +72,18 @@ def get_spamhaus_ip(link):
         except:
             pass
 
-
 def set_blocklist(ips):
-    
     cmdstring = "iptables -A droplist -s %s -j DROP" % (ips)
     os.system(cmdstring)
-
-
+    
 def use_blocklist():
     os.system("iptables -I INPUT -j droplist")	
     os.system("iptables -I OUTPUT -j droplist")
     os.system("iptables -I FORWARD -j droplist")
 
-
 def iptables_setup():
-
     print "\n\n\n(+) Flushing old rules in droplist\n"
     os.system("iptables -F droplist")
-
     print "(+) Installing firewall"
     f002 = open('/etc/iptables.firewall.rules','w')
     f002.write(Iptable_rules)
@@ -100,39 +91,29 @@ def iptables_setup():
     os.system("iptables-restore < /etc/iptables.firewall.rules")
     print "(+) Firewall is running"
     print "(+) Setting up firewall on startup"
-
     print "\n(+) Creating droplist chain"
     os.system("iptables -N droplist")
-
     firewall_startup = """
     #!/bin/sh
     /sbin/iptables-restore < /etc/iptables.firewall.rules
     /sbin/iptables -N droplist
-
     """
     f003 = open('/etc/network/if-pre-up.d/firewall','w')
     f003.write(firewall_startup)
     f003.close()
     os.system("chmod +x /etc/network/if-pre-up.d/firewall")
 
-
 def controller():
     print Welcome
     print "\n" 
     print Disclaimer	
-
     iptables_setup()
-
     print "(+) Quering Spamhaus Blacklist"
-
     for l in all_links:
         get_spamhaus_ip(l)
-
     print "(+) Refreshing droplist chain"
-
     for net in ip_list:
         set_blocklist(net)
-    
     print "(+) Applying droplist to filter chain"
     use_blocklist()
 
@@ -143,7 +124,6 @@ my_user = getpass.getuser()
 if(my_user != 'root'):
     print "(+) Please run this script as ROOT"
     sys.exit()
-
 else:
     os.system("clear")
     controller()
