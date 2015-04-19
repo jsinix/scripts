@@ -57,15 +57,11 @@ enc_key = '9876543210qwerty'
 #chage the arguments to change the detination 
 #directory as per your needs. 
 def jsinix_dropbox_uploader(input_file):
-
     client = dropbox.client.DropboxClient('xxxxxxxxxx-HereGoesYourToken-xxxxxxxxxx')
     account_dict = client.account_info()
-
     for key, value in account_dict.iteritems() :
         if key=='display_name':
             print "\n(+) Linked Account: %s" % value	
-	    
-
     ToBeUploaded = input_file
     ToBeUploadedPath = '/'+ToBeUploaded
     f = open(ToBeUploaded, 'rb')
@@ -77,42 +73,34 @@ def jsinix_dropbox_uploader(input_file):
 def encrypt_file(key, in_filename, out_filename=None, chunksize=64*1024):
     if not out_filename:
         out_filename = in_filename + '.enc'
-
     iv = ''.join(chr(random.randint(0, 0xFF)) for i in range(16))
     encryptor = AES.new(key, AES.MODE_CBC, iv)
     filesize = os.path.getsize(in_filename)
-
     with open(in_filename, 'rb') as infile:
         with open(out_filename, 'wb') as outfile:
             outfile.write(struct.pack('<Q', filesize))
             outfile.write(iv)
-
             while True:
                 chunk = infile.read(chunksize)
                 if len(chunk) == 0:
                     break
                 elif len(chunk) % 16 != 0:
                     chunk += ' ' * (16 - len(chunk) % 16)
-
                 outfile.write(encryptor.encrypt(chunk))
-
 
 def decrypt_file(key, in_filename, out_filename=None, chunksize=24*1024):
     if not out_filename:
         out_filename = os.path.splitext(in_filename)[0]
-
     with open(in_filename, 'rb') as infile:
         origsize = struct.unpack('<Q', infile.read(struct.calcsize('Q')))[0]
         iv = infile.read(16)
         decryptor = AES.new(key, AES.MODE_CBC, iv)
-
         with open(out_filename, 'wb') as outfile:
             while True:
                 chunk = infile.read(chunksize)
                 if len(chunk) == 0:
                     break
                 outfile.write(decryptor.decrypt(chunk))
-
             outfile.truncate(origsize)
 
 #This function is used to go through all
@@ -122,27 +110,20 @@ def decrypt_file(key, in_filename, out_filename=None, chunksize=24*1024):
 #temporary location and then either transferred 
 #to your dropbox account by encrypting optionally.
 def parse_attachments():
-
     print "(+) Getting all emails for domain jsinix.com"
-
     for root, subFolders, files in os.walk(vhostdir):
         for file in files:
             all_emails.append(os.path.join(root,file))
-
     print "(+) Changing PWD to %s" % to_store
     os.chdir(to_store)
-
     for path in all_emails:
-        
         fp = email.parser.FeedParser()
         fp.feed(open(path).read())
         msg = fp.close()
-
         for msg in msg.walk():
             fname = msg.get_filename()
             if fname == None:
                 continue
-
             try:
 	        if os.path.exists(fname) == True:
 		    print "(+) Filename %s already exists" % fname
@@ -159,14 +140,12 @@ def parse_attachments():
 			    fname_final = fname_enc
 			print "(+) Uploading %s to dropbox" % fname_final
 			jsinix_dropbox_uploader(fname_final)
-		
             except TypeError:
                 with open(fname, 'wb') as out:
 		    print "(+) Error occured for file %s" % fname
 		    out.write(message.get_payload())		
 
 def controller():
-
     print Welcome 
     print "\n\n"
     print Disclaimer	
@@ -174,7 +153,6 @@ def controller():
     print "(+) Change PWD to %s" % pwd
     os.chdir(pwd)
     print "\n(+) Upload complete"    		
-
 encornot = []
 
 # This script must be run as root to avoid permission
@@ -183,7 +161,6 @@ my_user = getpass.getuser()
 if(my_user != 'root'):
     print "(+) Please run this script as ROOT"
     sys.exit()
-
 else:
     os.system("clear")
     if len(sys.argv) == 2:
@@ -193,5 +170,4 @@ else:
 	          encornot = 0
      else:
 	       encornot = 0
-
     controller()
