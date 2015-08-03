@@ -1,0 +1,9 @@
+
+This script is used to get regular updates of exchange/currency rates via email and SMS on regular intervals via cronjob. 
+I am using twilio to send SMS messages. So you will have to create your own twillio account and add the key inside the script.
+
+1 7 * * * python /tmp/jsinix_xchange_email.py
+1 19 * * * python /tmp/jsinix_xchange_email.py
+
+Twilio can be installed by 'pip install twilio'
+
