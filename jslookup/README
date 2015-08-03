@@ -1,0 +1,27 @@
+jslookup is a tool similar to nslookup which works over http using an API. The supported query's include A, AAAA, CERT, NS, MX, DNS, PTR, SOA, SPF, TXT.
+
+Usage:
+
+[root]$ jslookup -aa google.com
+TYPE#~ AAAA     DATA#~ 2a00:1450:4001:805::1002 TTL#~ 199
+
+[root]$ jslookup -a google.com
+TYPE#~ A        DATA#~ 173.194.112.166  TTL#~ 300
+
+[root]$ jslookup -crt statdns.net
+TYPE#~ CERT     DATA#~ 3 0 0 U3RhdEROUyBQR1AgUHVibGljIEtleSAtIGh0dHA6Ly93d3cuc3RhdGRucy5uZXQK   TTL#~ 600
+
+[root]$ jslookup -ns google.com
+TYPE#~ NS       DATA#~ ns1.google.com.  TTL#~ 73275
+
+[root]$ jslookup -mx google.com
+TYPE#~ MX       DATA#~ 40 alt3.aspmx.l.google.com.      TTL#~ 600
+
+[root]$ jslookup -ptr 8.8.8.8
+TYPE#~ PTR      DATA#~ google-public-dns-a.google.com.  TTL#~ 84068
+
+[root]$ jslookup -soa google.com
+TYPE#~ SOA      DATA#~ ns1.google.com. dns-admin.google.com. 4294967295 7200 1800 1209600 300   TTL#~ 86400
+
+[root]$ jslookup -txt google.com
+TYPE#~ TXT      DATA#~ "v=spf1 include:_spf.google.com ~all"    TTL#~ 3600
