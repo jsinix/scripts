@@ -1,0 +1,1 @@
+This script's basic function is to take a URL as input and download the page, then uses the wdyl.com API to check if the data has any kind of curse word in it.
