@@ -1,0 +1,1 @@
+This script is used to get RSS feeds from http://thehackernews.com news and http://www.securityfocus.com latest vulnerability disclosures. This can be used to send email to yourself on regular intervals to keeps up to date with whats going on. 
