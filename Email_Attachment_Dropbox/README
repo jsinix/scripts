@@ -1,0 +1,5 @@
+This script is a neat and cheap way to backup all the attachments of all emails and optionally encrypt them. After that these files are send over to your dropbox 
+account. You will have to generate your own token by going to https://www.dropbox.com/developers/apps and replace it in the script. 
+
+If a person manages his/her own mail server and do not want to bother much about spending on backups of the data. Use this script to backup to a free dropbox account.
+
