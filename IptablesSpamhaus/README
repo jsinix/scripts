@@ -1,0 +1,3 @@
+I wrote this script to setup basic iptable rules to secure the system. In addition to that, this script queries spamhaus's blacklisted IP/Network addresses. These IP's are then stored in a new chain called droplist. Finally
+it is referenced in the default filter table chains(i.e INPUT, OUTPUT and FORWARD). This script or its customized version can be useful for many type of public facing servers including mail servers to protect from spams etc.
+Please use this at yur own risk and read carefully before using. You might need to change some parts according to your needs. 
