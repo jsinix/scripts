@@ -1,1 +1,1 @@
-This small piece of code returns list of all of my system interfaces. Tested it on Ubuntu and hope it works for other *nix systems.  
+This piece of code returns list of all of my system interfaces and their details. Tested it on Ubuntu and hope it works for other *nix systems.  
