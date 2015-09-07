@@ -33,4 +33,5 @@ allNixInterfaces = getNixInterfaces()
 for eachInt in allNixInterfaces:
     eachIntDetail = intDetails(eachInt)
     if eachIntDetail != None:
-        print "Interface:\t%s\nIP Address:\t%s\nMAC Address:\t%s\nBroadcast:\t%s\nNetmask:\t%s\nIPv6 Address:\t%s\n" %(eachIntDetail[0], eachIntDetail[1],eachIntDetail[2], eachIntDetail[3], eachIntDetail[4], eachIntDetail[5])
+        print "Interface:\t%s\nIP Address:\t%s\nMAC Address:\t%s\nBroadcast:\t%s\nNetmask:\t%s\nIPv6 Address:\t%s\n" \
+        %(eachIntDetail[0], eachIntDetail[1],eachIntDetail[2], eachIntDetail[3], eachIntDetail[4], eachIntDetail[5])
