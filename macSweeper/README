@@ -2,5 +2,5 @@ This script can be used for network recon. For all those machines that have fire
 
 I have tried to create this script with nothing else to be configured. Just run it and it should just work. 
 
-It gets all the interfaces of your machine, gets their IP and network mask and calculates all the possible host addresses in that network. The by using scapy ARP requests are sent out and replies are printed out. 
+It gets all the interfaces of your machine, gets their IP and network mask and calculates all the possible host addresses in that network. Then by using scapy ARP requests are sent out and replies are printed out. 
 
