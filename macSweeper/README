@@ -1,2 +1,5 @@
+Version 1
 This script can be used for network recon. For all those machines that have firewall enabled, they cannot block layer two recon and this does not create a lot of noise.  I have tried to create this script with nothing else to be configured. Just run it and it should just work. It gets all the interfaces of your machine, gets their IP and network mask and calculates all the possible host addresses in that network. Then by using scapy ARP requests are sent out and replies are printed out. 
 
+Version 2
+silentScanner is version 2 of the initial macSweeper script. So the output from the macSweeper script is used as an input to scan all these hosts for any open ports for these hosts. It is better than sending traffic to all the networks IP addresses as if a hosts is in the same network it should respond to ARP requests in the first place. I am planning to create a next revision of this and try making it faster but doing some multi threading. 
