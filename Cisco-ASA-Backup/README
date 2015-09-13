@@ -1,0 +1,1 @@
+I have written this program to backup Cisco ASA running config. This cript supports dual factor(OTP) as well as Active/Backup device configuration. 
