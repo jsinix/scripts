@@ -83,6 +83,9 @@ def fileStorageHandler(filesMoveLocal):
             shutil.move(eachFile, currDateDir+"/"+eachFile)
             print("\t\t"+Fore.GREEN+ "(+) " +Style.RESET_ALL+"Compressed file moved to " +currDateDir)
 
+# http://stackoverflow.com/questions/9370886/pexpect-if-else-statement 
+# http://eli.thegreenplace.net/2010/06/25/aes-encryption-of-files-in-python-with-pycrypto/ 
+# http://www.irongeek.com , http://linux.byexamples.com/archives/346/python-how-to-access-ssh-with-pexpect/
 def asaConfigBackup(jHostnameIpLocal, jHostnameLocal, jUserLocal, jenpassLocal, enablePassLocal):
     try:
         child = pexpect.spawn ('ssh ' + jUserLocal + '@' + jHostnameIpLocal)
