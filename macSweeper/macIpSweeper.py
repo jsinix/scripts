@@ -54,7 +54,8 @@ def arpRequester(returnedHostsIn, currIntIn):
         # FYI if you keep the timeout value high, it will take a lot of
         # time to scan your network depending on your network size.
         try:
-            ans, unans = srp(Ether(dst='ff:ff:ff:ff:ff:ff')/ARP(pdst=eachHost, hwdst='ff:ff:ff:ff:ff:ff'), iface=currIntIn, timeout=0.50, inter=0.1)
+            ans, unans = srp(Ether(dst='ff:ff:ff:ff:ff:ff')/ARP(pdst=eachHost, hwdst='ff:ff:ff:ff:ff:ff'), \
+            iface=currIntIn, timeout=0.50, inter=0.1)
             for send, rcv in ans:
                 print rcv.sprintf(r"    %Ether.src% is at %ARP.psrc%")
         except Exception as e:
