@@ -1,1 +1,5 @@
 Want to send emails from your GMAIL account via CLI ? Well, you can use this script or modify upton this to do that easily.
+
+Usage:
+jmailer -u 'jsinix.1337' -r 'jsinix.1337@gmail.com' -s 'Python wikipedia'
+jmailer -u 'jsinix.1337' -r 'jsinix.1337@gmail.com' -s 'Python wikipedia' -a avatar.PNG
