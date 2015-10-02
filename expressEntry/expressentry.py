@@ -32,6 +32,9 @@ def comparison():
             else:
                 print "Point changed: %s" % score1
                 finalText = emailBodyGen()
+                wr = open('/var/log/lastCutOff.txt','w')
+                wr.write(str(score1)+'\n')
+                wr.close()
                 return True, finalText
 
     else:
