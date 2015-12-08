@@ -1,0 +1,11 @@
+This script is used to find out the senderbase score for an IP or a domain.
+
+[root@script-01 ~]$ senderbase -i 173.194.72.26
+IP: 173.194.72.26       Score: 2.9
+
+[root@script-01 ~]$ senderbase -d google.com
+MX: alt3.aspmx.l.google.com.    IP: 173.194.72.26       Score: 2.9
+MX: alt2.aspmx.l.google.com.    IP: 64.233.189.27       Score: 2.9
+MX: alt4.aspmx.l.google.com.    IP: 74.125.25.27        Score: 2.9
+MX: aspmx.l.google.com.         IP: 173.194.65.26       Score: 2.9
+MX: alt1.aspmx.l.google.com.    IP: 74.125.130.27       Score: None
