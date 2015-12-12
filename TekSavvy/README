@@ -1,0 +1,11 @@
+This script will get you your Teksavvy internet usage. 
+
+root@jsinix01:~# teksavvyusage
+usage: teksavvyusage [-h] [-p] [-e]
+
+This tool get te stats of your TekSavvy internet usage.
+
+optional arguments:
+  -h, --help   show this help message and exit
+  -p, --print  Only print the stats(no email)
+  -e, --email  Print and send email stats
