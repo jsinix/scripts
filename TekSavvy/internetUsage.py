@@ -2,6 +2,7 @@
 
 import httplib, json
 import smtplib, time
+import argparse, sys
 
 def getUsage():
     APIKEY = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" # Replace your own key here 
@@ -20,7 +21,35 @@ def getUsage():
     usageData =  "Start Date: %s  \nEnd Date: %s  \nOn Peak Download: %s  \nOn Peak Upload: %s \nOff Peak Download: %s \nOff Peak Upload: %s" % (sd, ed, pd, pu, opd, opu)
     return usageData
 
+def process_arguments(args):
+    parser = argparse.ArgumentParser(description="This is LinkedIN mining tool. Use it wisely")
+
+    parser.add_argument('-p',
+                        '--print',
+                        action='store_true',
+                        help="Only print the stats(no email)"
+                        )
+    parser.add_argument('-e',
+                        '--email',
+                        action='store_true',
+                        help="Print and send email stats"
+                        )
+    options = parser.parse_args(args)
+    return vars(options)
+
+if len(sys.argv) < 2:
+    process_arguments(['-h'])
+userOptions = process_arguments(sys.argv[1:])
+
 text = getUsage()
+
+if userOptions["print"] == True:
+    print text
+    sys.exit()
+
+if userOptions["email"] == True:
+    print text
+    
 logo = '\n\nNote: This is an automated email. This message and any accompanying attachments are intended only for the person(s) to whom this message is addressed and may contain privileged, proprietary and/or confidential information. '
 TEXT = text + logo
 
@@ -38,3 +67,4 @@ Subject: %s
 server = smtplib.SMTP(SERVER)
 server.sendmail(FROM, TO, message)
 server.quit()
+print "(+) Email sent to %s" %TO
