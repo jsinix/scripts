@@ -22,7 +22,7 @@ def getUsage():
     return usageData
 
 def process_arguments(args):
-    parser = argparse.ArgumentParser(description="This is LinkedIN mining tool. Use it wisely")
+    parser = argparse.ArgumentParser(description="This tool get te stats of your TekSavvy internet usage.")
 
     parser.add_argument('-p',
                         '--print',
