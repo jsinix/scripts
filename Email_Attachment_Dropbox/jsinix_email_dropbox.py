@@ -1,28 +1,21 @@
-# Permission to use, copy, modify and distribute this 
-# software and its documentation for any purpose and 
-# without fee is hereby granted, provided that the above 
-# copyright notice appear in all copies that both 
-# copyright notice and this permission notice appear in 
-# supporting documentation. jsinix makes no representations 
-# about the suitability of this software for any purpose. 
-# It is provided "as is" without express or implied warranty.
-
-# jsinix DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE, 
-# INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. 
-# IN NO EVENT SHALL jsinix BE LIABLE FOR ANY SPECIAL, INDIRECT 
-# OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM 
-# LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, 
-# NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN 
-# CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-
 #!/usr/bin/python
+
+# Disclaimer: This script is only for educational purposes.
+# Please use this at your own risk.
+# Author: jsinix(jsinix.1337@gmail.com) 
+
+# This script is a neat and cheap way to backup all the attachments 
+# of all emails and optionally encrypt them. After that these files 
+# are send over to your dropbox account. You will have to generate 
+# your own token by going to https://www.dropbox.com/developers/apps 
+# and replace it in the script. 
+
 import os, random, struct
 from Crypto.Cipher import AES
 import email.parser
 import os, sys, getpass
 import base64
-import dropbox
-#Using: pip install dropbox
+import dropbox #Using: pip install dropbox
 
 Welcome = """\
          _     _       _
@@ -50,14 +43,14 @@ all_emails = []
 pwd = os.getcwd()
 to_store = "/root/scripts/jsinix/"
 vhostdir = "/var/mail/vhosts/jsinix.com/"
-enc_key = '9876543210qwerty'
+enc_key = '9876543210qwerty' # Change this encryption key to something more secure
 
 #This function is used to upload the files 
 #to your dropbox account. Note that you can 
 #chage the arguments to change the detination 
 #directory as per your needs. 
 def jsinix_dropbox_uploader(input_file):
-    client = dropbox.client.DropboxClient('xxxxxxxxxx-HereGoesYourToken-xxxxxxxxxx')
+    client = dropbox.client.DropboxClient('xxxxxxxxxx-HereGoesYourDropboxClientToken-xxxxxxxxxx')
     account_dict = client.account_info()
     for key, value in account_dict.iteritems() :
         if key=='display_name':
