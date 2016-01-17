@@ -1,4 +1,14 @@
 #!/usr/bin/python
+
+# Disclaimer: This script is only for educational purposes.
+# Please use this at your own risk.
+# Author: jsinix(jsinix.1337@gmail.com) 
+
+# This script is a quick way to find out whenever there is any change in 
+# the express antry draw points. It will send out an email to the interested 
+# person. This script is for educational purposes only. I am not liable 
+# for any other uses for this. 
+
 import requests, smtplib
 from bs4 import BeautifulSoup
 import re, time, os, sys
