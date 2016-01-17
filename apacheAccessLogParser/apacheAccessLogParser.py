@@ -1,4 +1,9 @@
 #!/usr/bin/python
+
+# Disclaimer: This script is only for educational purposes.
+# Please use this at your own risk.
+# Author: jsinix(jsinix.1337@gmail.com) 
+
 import urlparse
 import sys, argparse
 
@@ -15,7 +20,7 @@ def logParser(ipAddressX, countBitX):
                         print line
     if countBitX == 1:
         print "Total hits: %s" %occurCount
-# -------------------------------
+
 # Just parsing CLI input
 def process_arguments(args):
     parser = argparse.ArgumentParser(description="HTTP Access Log Parser")
@@ -31,12 +36,11 @@ def process_arguments(args):
                         )
     options = parser.parse_args(args)
     return vars(options)
+
 if len(sys.argv) < 2:
     process_arguments(['-h'])
-userOptions = process_arguments(sys.argv[1:])
-# print userOptions
-# -------------------------------
 
+userOptions = process_arguments(sys.argv[1:])
 ipAddress = userOptions['ip_address']
 countOrNot = userOptions['hit_count']
 if countOrNot == True:
