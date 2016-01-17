@@ -4,6 +4,11 @@
 # Please use this at your own risk.
 # Author: jsinix(jsinix.1337@gmail.com) 
 
+# This script is used to get RSS feeds from http://thehackernews.com 
+# news and http://www.securityfocus.com latest vulnerability disclosures. 
+# This can be used to send email to yourself on regular intervals to 
+# keeps up to date with whats going on. 
+
 import calendar, datetime
 import smtplib, errno, sys, re
 import string, os, time, urllib2
