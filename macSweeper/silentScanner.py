@@ -1,16 +1,20 @@
 #!/usr/bin/python
 
+# Disclaimer: This script is only for educational purposes.
+# Please use this at your own risk.
+# Author: jsinix(jsinix.1337@gmail.com) 
+
 from subprocess import check_output
 from netaddr import *
-import logging, getpass
-import argparse, sys, nmap
+import logging, getpass, sys
+import argparse, nmap
 from multiprocessing import Pool
 logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
 from scapy.all import *
+
 conf.verb=0
 globalInt = ''
 vBit = True
-
 def scanUsingNmap(ipAddrIn):
     thisIpAllPortDict = {}
     nm = nmap.PortScanner()
