@@ -1,4 +1,4 @@
-This script runs to grab results of all the roll numbers range passed as a range. This can be used to dump all the possible roll numbers possible. There is just one that is done on the client side if the roll numbers are valid or not are to check the first two digits of the roll number.  If you view the source of the page you will notice that the valid roll numbers start with 16, 17, ..... 99. So you can start with that.
+This script runs to grab results of all the roll numbers range passed as a range. This can be used to dump all the possible roll numbers possible. There is just one validation check that is done on the client side if the roll numbers are valid or not are to check the first two digits of the roll number.  If you view the source of the page you will notice that the valid roll numbers start with 16, 17, ..... 99. So you can start with that.
 
 Once the entire database id dumped, you can reverse search someone's details by just the name by 'grep' etc if you do not know someone's roll number.
 
