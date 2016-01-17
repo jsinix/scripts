@@ -1,19 +1,8 @@
-# Permission to use, copy, modify and distribute this 
-# software and its documentation for any purpose and 
-# without fee is hereby granted, provided that the above 
-# copyright notice appear in all copies that both 
-# copyright notice and this permission notice appear in 
-# supporting documentation. jsinix makes no representations 
-# about the suitability of this software for any purpose. 
-# It is provided "as is" without express or implied warranty.
+#!/usr/bin/python
 
-# jsinix DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE, 
-# INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. 
-# IN NO EVENT SHALL jsinix BE LIABLE FOR ANY SPECIAL, INDIRECT 
-# OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM 
-# LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, 
-# NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN 
-# CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+# Disclaimer: This script is only for educational purposes.
+# Please use this at your own risk.
+# Author: jsinix(jsinix.1337@gmail.com)
 
 # Getting updates on exchange/currency rates via 
 # email and SMS on regular intervals via cronjob. 
@@ -21,7 +10,6 @@
 # 1 19 * * * python /tmp/jsinix_xchange_email.py
 # Twilio can be installed by 'pip install twilio'
 
-#!/usr/bin/python
 import urllib, ast
 import smtplib, time
 from twilio.rest import TwilioRestClient
@@ -38,7 +26,6 @@ ptime = time.strftime("%H:%M:%S")
 xvalue = get_rate("INR")
 subb = "USD2INR : "+pdate+ " "+ptime
 TEXT = "1 USD = %s INR" % xvalue
-
 SERVER = "localhost"
 FROM = "jsinix@jsinix.com"
 TO = ["jsinix.1337@gmail.com"]
@@ -50,11 +37,9 @@ Subject: %s
 
 %s
 """ % (FROM, ", ".join(TO), SUBJECT, TEXT)
-
 server = smtplib.SMTP(SERVER)
 server.sendmail(FROM, TO, message)
 server.quit()
-
 
 def jsinix_sms(messms, rcpsms):
     account_sid = "ACxxxxxxxxxxxxxxxxxxxxxxxxxxx"
@@ -62,8 +47,7 @@ def jsinix_sms(messms, rcpsms):
     client = TwilioRestClient(account_sid, auth_token)
     message = client.messages.create(to=rcpsms, from_="+1xxxxxxxxxx", body=messms)
 
-numbers = ["+14160000000", "+16470000000"]
-
+numbers = ["+14160000000", "+16470000000"] # Add you cell phone numbers here
 for i in numbers:
     try:
         jsinix_sms(SUBJECT+" "+TEXT, i)
