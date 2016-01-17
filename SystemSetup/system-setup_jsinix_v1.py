@@ -1,50 +1,19 @@
-# Permission to use, copy, modify and distribute this 
-# software and its documentation for any purpose and 
-# without fee is hereby granted, provided that the above 
-# copyright notice appear in all copies that both 
-# copyright notice and this permission notice appear in 
-# supporting documentation. jsinix makes no representations 
-# about the suitability of this software for any purpose. 
-# It is provided "as is" without express or implied warranty.
-
-# jsinix DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE, 
-# INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. 
-# IN NO EVENT SHALL jsinix BE LIABLE FOR ANY SPECIAL, INDIRECT 
-# OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM 
-# LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, 
-# NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN 
-# CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-
 #!/usr/bin/python
-import sys, os
-import datetime
-import socket
-import getpass
-import time
+
+# Disclaimer: This script is only for educational purposes.
+# Please use this at your own risk.
+# Author: jsinix(jsinix.1337@gmail.com) 
+
+# This script is written to expidite the process of initial system configuration
+# (specifically Ubuntu). These initial things include basic setup, securing the
+# system(firewall), updating it etc. I have not tested this with any other distro 
+# but this can be modified to suit your need.Its preferrable you run this on new
+# system as it overwrite some files.
+
+import sys, os, datetime
+import socket, getpass, time
 from subprocess import STDOUT, check_call
 from contextlib import contextmanager
-
-Welcome = """\
-         _     _       _
-        (_)   (_)     (_)
-         _ ___ _ _ __  ___  __
-        | / __| | '_ \| \ \/ /
-        | \__ \ | | | | |>  <
-        | |___/_|_| |_|_/_/\_\.
-       _/ |
-      |__/
-
-"""
-
-Disclaimer = """\
-\nAuthor: jsinix(jsinix.1337@gmail.com)
-
-This script is written to expidite the process of initial system configuration
-(specifically Ubuntu). These initial things include basic setup, securing the
-system(firewall), updating it etc. I have not tested this with any other distro 
-but this can be modified to suit your need.Its preferrable you run this on new
-system as it overwrite some files.
-"""
 
 Iptable_rules = """
 *filter
@@ -126,26 +95,20 @@ def controller():
     print Welcome
     print Disclaimer
     option01 = raw_input("Should we start ?(y/n) ")
-
     if option01 == 'y':
         hostname_setup()
         time.sleep(1)
         timezone_setup()
-
         if internet == True:
             print "\n(+) Looks like system is connected to internet."
             update_setup()
-
             fail2ban_setup()
-
         elif internet == False:
             print "\n(+) Looks like no internet connectivity"
             print "    Dropping repo update"
-
     elif option01 == 'n':
         print "\n(+) Exiting"
         sys.exit()
-
     else:
         print "\n(+) Unknown choice"
         print "(+) Exiting"
@@ -159,7 +122,6 @@ my_user = getpass.getuser()
 if(my_user != 'root'):
     print "(+) Please run this script as ROOT"
     sys.exit()
-
 else:
     controller()
     print "\n(+) Restart the system(recommended) !"
