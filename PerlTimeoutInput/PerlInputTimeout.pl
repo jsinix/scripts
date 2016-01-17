@@ -5,7 +5,7 @@
 # Author: jsinix(jsinix.1337@gmail.com) 
 
 # This is a script that demonstrates how to get input from keyboard 
-# with a timeout. This can be useful # in many places.
+# with a timeout. This can be useful at many places.
 
 use strict;
 use warnings;
