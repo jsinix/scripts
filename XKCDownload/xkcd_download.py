@@ -57,7 +57,6 @@ def get_image_url(uri01):
     interest =  g_data[2].contents[5]
     interest = str(interest)
     from_interest = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', interest)
-
     for jj in from_interest:
         collect_url.append(jj)
 
@@ -81,9 +80,7 @@ def max_range(uri03):
     return word2
 
 def controller():
-
     upper_limit = max_range(url1)    
-
     try: 
 	sys.stdout.write('\rParsing: ' + url1)
 	sys.stdout.flush()
@@ -92,7 +89,6 @@ def controller():
         print "\nParse error: %s" % url1    
 
     for tailer in range(1,upper_limit):
-
         try:
 	    current_url = url1+str(tailer)+"/"
 	    sys.stdout.write('\rParsing: ' + current_url)
@@ -105,7 +101,6 @@ def controller():
 	try: 
 	    sys.stdout.write('\rDownloading: ' + iLink)
 	    download_url(iLink)
-	
         except:
 	    print "\nDownload error: %s" % iLink    
 
