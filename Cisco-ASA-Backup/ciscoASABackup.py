@@ -1,5 +1,9 @@
 #!/usr/bin/python
 
+# Disclaimer: This script is only for educational purposes.
+# Please use this at your own risk.
+# Author: jsinix(jsinix.1337@gmail.com)
+
 import getpass, subprocess
 import pexpect, sys, colorama
 import time, random, datetime
@@ -106,7 +110,6 @@ def asaConfigBackup(jHostnameIpLocal, jHostnameLocal, jUserLocal, jenpassLocal, 
             print("\t\t"+Fore.GREEN+ "(+) "+Style.RESET_ALL+ "Accepting SSH keys from " +jHostnameLocal)
             child.sendline('yes')
             i = child.expect([ssh_newkey, '.*assword:.*', pexpect.EOF, pexpect.TIMEOUT], 1)
-
         elif i==1:
             print("\t\t"+Fore.GREEN+ "(+) "+Style.RESET_ALL+ "Authenticating ")
             child.sendline(jenpassLocal)
@@ -124,7 +127,6 @@ def asaConfigBackup(jHostnameIpLocal, jHostnameLocal, jUserLocal, jenpassLocal, 
             if jHostnameLocal in asaBoxesNC:
                 # Regex to compare standalone device
                 boxNameRegex01 = jHostnameLocal[:-4]+".*# "
-
             else:
                 # Regex to check if ASA is in Active/Standby mode
                 boxNameRegex01 = jHostnameLocal[:-4]+".*./(act|stby|sec|pri)/(pri|sec|act|stby).*# "
@@ -155,7 +157,6 @@ def asaConfigBackup(jHostnameIpLocal, jHostnameLocal, jUserLocal, jenpassLocal, 
             compressedFileArray.append(jFnameLocalZip)
             fileStorageHandler(compressedFileArray)
             os.remove(jFnameLocal)
-
         elif i==2:
             print "\t"+Fore.GREEN+ "(+) "+Style.RESET_ALL+ "Wrong Password or Unknown Error"
 
