@@ -1,28 +1,9 @@
-# Permission to use, copy, modify and distribute this 
-# software and its documentation for any purpose and 
-# without fee is hereby granted, provided that the above 
-# copyright notice appear in all copies that both 
-# copyright notice and this permission notice appear in 
-# supporting documentation. jsinix makes no representations 
-# about the suitability of this software for any purpose. 
-# It is provided "as is" without express or implied warranty.
-
-# jsinix DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE, 
-# INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. 
-# IN NO EVENT SHALL jsinix BE LIABLE FOR ANY SPECIAL, INDIRECT 
-# OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM 
-# LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, 
-# NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN 
-# CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-
 #!/usr/bin/python
-import mechanize
-from multiprocessing import Pool
 
 # Disclaimer: This script is only for educational purposes.
 # Please use this at your own risk.
 # Author: jsinix(jsinix.1337@gmail.com) 
-#
+
 # This script runs to grab results of all the roll numbers 
 # range passed as a range. This can be used to dump all the 
 # possible roll numbers possible. There is just one that is 
@@ -36,6 +17,9 @@ from multiprocessing import Pool
 # not know someone's roll number.
 # In addition to that, this script uses parallel processing
 # to send multiple requests simultaniously to save time.
+
+import mechanize
+from multiprocessing import Pool
 
 def result_grabber(rollx):
     rollx = str(rollx)
