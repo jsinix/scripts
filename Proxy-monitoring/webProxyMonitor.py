@@ -4,6 +4,12 @@
 # Please use this at your own risk.
 # Author: jsinix(jsinix.1337@gmail.com) 
 
+# If you are using a proxy at home or office and you want a cheap and 
+# reliable way of monitoring it w.r.t to if the web requests are being 
+# passing through it properly, this script is what you would need. This 
+# script supports multiple proxies. If there is any issue getting a 
+# response, it will send an email to you so as to do manual investigation. 
+
 import urllib2, socket
 import smtplib, logging
 import logging.handlers
