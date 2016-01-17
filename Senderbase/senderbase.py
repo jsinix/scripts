@@ -1,23 +1,32 @@
 #!/usr/bin/python
+
+# Disclaimer: This script is only for educational purposes.
+# Please use this at your own risk.
+# Author: jsinix(jsinix.1337@gmail.com) 
+
 import urllib2, argparse
 import json, sys
 
-baseUrl = "http://api.statdns.com/"
 helpMsg = """
-
 SenderBase scores are assigned to IP addresses based on a combination of factors, including email volume and reputation.
-
-Reputation scores in SenderBase may range from -10 to +10, reflecting the likelihood that a sending IP address is trying to send spam. Highly negative scores indicate senders who are very likely to be sending spam; highly positive scores indicate senders who are unlikely to be sending spam.
-
-SenderBase is a designed to help email administrators better manage incoming email streams by providing objective data about the identity of senders. SenderBase is akin to a credit reporting service for email, providing data that ISPs and companies can use to differentiate legitimate senders from spam sources. SenderBase provides objective data that allows email administrators to reliably identify and block IP addresses originating unsolicited commercial email (UCE) or to verify the authenticity of legitimate incoming email from business partners, customers or any other important source. What makes SenderBase unique is that it provides a global view of email message volume and organizes the data in a way that it is easy to identify and group related sources of email. SenderBase combines multiple sources of information to determine a "reputation score" for any IP address. This information includes:
-
+Reputation scores in SenderBase may range from -10 to +10, reflecting the likelihood that a sending IP address is trying 
+to send spam. Highly negative scores indicate senders who are very likely to be sending spam; highly positive scores 
+indicate senders who are unlikely to be sending spam.
+SenderBase is a designed to help email administrators better manage incoming email streams by providing objective data 
+about the identity of senders. SenderBase is akin to a credit reporting service for email, providing data that ISPs and 
+companies can use to differentiate legitimate senders from spam sources. SenderBase provides objective data that allows 
+email administrators to reliably identify and block IP addresses originating unsolicited commercial email (UCE) or to 
+verify the authenticity of legitimate incoming email from business partners, customers or any other important source. 
+What makes SenderBase unique is that it provides a global view of email message volume and organizes the data in a way 
+that it is easy to identify and group related sources of email. SenderBase combines multiple sources of information to 
+determine a "reputation score" for any IP address. This information includes:
 - Email volume information provided by tens of thousands of organizations that regularly receive Internet email
 - Spam complaints received by the SpamCop service
 - Information on other DNS-based blacklists
-
 Reference: http://www.cisco.com/c/en/us/support/docs/security/email-security-appliance/118380-technote-esa-00.html
 """
 
+baseUrl = "http://api.statdns.com/"
 def queryDNSmx(urlToParse):
     try:
         ipArr = []
