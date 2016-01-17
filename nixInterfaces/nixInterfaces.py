@@ -1,4 +1,9 @@
 #!/usr/bin/python
+
+# Disclaimer: This script is only for educational purposes.
+# Please use this at your own risk.
+# Author: jsinix(jsinix.1337@gmail.com) 
+
 from subprocess import check_output
 
 def getNixInterfaces():
