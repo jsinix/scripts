@@ -1,5 +1,9 @@
 #!/usr/bin/python
 
+# Disclaimer: This script is only for educational purposes.
+# Please use this at your own risk.
+# Author: jsinix(jsinix.1337@gmail.com) 
+
 import calendar, datetime
 import smtplib, errno, sys, re
 import string, os, time, urllib2
