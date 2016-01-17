@@ -1,15 +1,18 @@
 #!/usr/bin/python
 
+# Disclaimer: This script is only for educational purposes.
+# Please use this at your own risk.
+# Author: jsinix(jsinix.1337@gmail.com) 
+
 # Do not forget to enable access
 # https://www.google.com/settings/security/lesssecureapps
 
-import smtplib, getpass, os, argparse
+import smtplib, getpass, os, argparse, sys
 from tempfile import NamedTemporaryFile
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEBase import MIMEBase
 from email.MIMEText import MIMEText
 from email import Encoders
-import sys
 
 # This module is the main email packer that will pack
 # all of your headers, body and any attachments that need
@@ -24,14 +27,12 @@ def emailSender(usernameIn, passwordIn, fromIn, ToIn, msgIn, subjectIn, attach=N
         msg['To'] = ToIn
         msg['Subject'] = subjectIn
         msg.attach(MIMEText(msgIn))
-
         if attach != None:
             part = MIMEBase('application', 'octet-stream')
             part.set_payload(open(attach, 'rb').read())
             Encoders.encode_base64(part)
             part.add_header('Content-Disposition', 'attachment; filename="%s"' % os.path.basename(attach))
             msg.attach(part)
-
         mailServer = smtplib.SMTP("smtp.gmail.com", 587)
         mailServer.ehlo()
         mailServer.starttls()
