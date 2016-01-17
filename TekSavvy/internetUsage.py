@@ -1,5 +1,9 @@
 #!/usr/bin/python
 
+# Disclaimer: This script is only for educational purposes.
+# Please use this at your own risk.
+# Author: jsinix(jsinix.1337@gmail.com) 
+
 import httplib, json
 import smtplib, time
 import argparse, sys
@@ -23,7 +27,6 @@ def getUsage():
 
 def process_arguments(args):
     parser = argparse.ArgumentParser(description="This tool get te stats of your TekSavvy internet usage.")
-
     parser.add_argument('-p',
                         '--print',
                         action='store_true',
@@ -39,8 +42,8 @@ def process_arguments(args):
 
 if len(sys.argv) < 2:
     process_arguments(['-h'])
-userOptions = process_arguments(sys.argv[1:])
 
+userOptions = process_arguments(sys.argv[1:])
 text = getUsage()
 
 if userOptions["print"] == True:
