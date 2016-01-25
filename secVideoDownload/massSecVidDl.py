@@ -83,7 +83,7 @@ def getPLUrls(url):
         exit(1)
     try:
         sTUBE = str(urllib2.urlopen(url).read())
-    except urllib.error.URLError as e:
+    except Exception as e:
         print e.reason
     tmp_mat = re.compile(r'watch\?v=\S+?list=' + cPL)
     mat = re.findall(tmp_mat, sTUBE)
