@@ -8,7 +8,6 @@
 # https://github.com/PaulSec/awesome-sec-talks
 # Reference:
 # http://stackoverflow.com/questions/3041986/python-command-line-yes-no-input
-# https://github.com/nficano/pytube
 # http://code.activestate.com/recipes/578284-youtube-playlist-parserextractor/
 
 import urllib2, re, sys
