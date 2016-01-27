@@ -15,7 +15,7 @@ import urllib2, re, signal
 from pytube import YouTube
 from pprint import pprint
 import sys, unicodedata
-import urlparse
+import urlparse, argparse
 from BeautifulSoup import BeautifulSoup
 
 def secYTLinks():
@@ -34,8 +34,6 @@ def secYTLinks():
     return playlistLinks
 
 playlists = secYTLinks()
-vidListFinal = []
-
 def getPLUrls(url):
     sTUBE = ''
     cPL = ''
@@ -93,16 +91,64 @@ def downloadVideo(url):
 def signal_handler(signal, frame):
     print('\n(-) I quit,  You pressed Ctrl+C\n')
     sys.exit(0)
-
 signal.signal(signal.SIGINT, signal_handler)
-for eachPL in playlists:
-    eachVidList = getPLUrls(eachPL)
-    vidListFinal = vidListFinal + eachVidList
-vidListFinalUnique = list(set(vidListFinal))
-print "(+) Total videos: %s" %len(vidListFinalUnique)
-userAnswer = raw_input('(+) Start download?[y/n] ').lower()
-if userAnswer == 'n' or userAnswer == 'N':
+
+def downloadAllSec():
+    vidListFinal = []
+    for eachPL in playlists:
+        eachVidList = getPLUrls(eachPL)
+        vidListFinal = vidListFinal + eachVidList
+    vidListFinalUnique = list(set(vidListFinal))
+    print "(+) Total videos: %s" %len(vidListFinalUnique)
+    userAnswer = raw_input('(+) Start download?[y/n] ').lower()
+    if userAnswer == 'n' or userAnswer == 'N':
+        print "(+) Exiting"
+        sys.exit()
+    for eachVid in vidListFinalUnique:
+        downloadVideo(eachVid)
+
+def process_arguments(args):
+    parser = argparse.ArgumentParser(description="Youtube video download tool")
+    parser.add_argument('-l',
+                        '--link',
+                        #action='store_true',
+                        help="Single youtube video to download"
+                        )
+    parser.add_argument('-p',
+                        '--playlist',
+                        #action='store_true',
+                        help='Youtube playlist url to download all videos'
+                        )
+    parser.add_argument('-s',
+                        '--sec',
+                        action='store_true',
+                        help='All sec-talk videos'
+                        )
+    options = parser.parse_args(args)
+    return vars(options)
+if len(sys.argv) < 2:
+    process_arguments(['-h'])
+userOptions = process_arguments(sys.argv[1:])
+
+if userOptions["sec"] == True:
+    downloadAllSec()
     print "(+) Exiting"
     sys.exit()
-for eachVid in vidListFinalUnique:
-    downloadVideo(eachVid)
+if userOptions["playlist"] != None:
+    ytpllink = userOptions["playlist"]
+    vidList = getPLUrls(ytpllink)
+    vidListUnique = list(set(vidList))
+    print "(+) Total videos: %s" %len(vidListUnique)
+    userAnswer = raw_input('(+) Start download?[y/n] ').lower()
+    if userAnswer == 'n' or userAnswer == 'N':
+        print "(+) Exiting"
+        sys.exit()
+    for eachLink in vidListUnique:
+        downloadVideo(eachLink)
+    print "(+) Exiting"
+    sys.exit()
+if userOptions["link"] != None:
+    vidLink = userOptions["link"]
+    downloadVideo(vidLink)
+    print "(+) Exiting"
+    sys.exit()
