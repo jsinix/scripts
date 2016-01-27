@@ -1,2 +1,14 @@
 This script can be used to download the SecTalks indexed here https://github.com/PaulSec/awesome-sec-talks But its not just limited to these indexed youtube videos. You can modify this(add any youtube playlist or single videos) according to your needs. 
 
+usage: massSecVidDl.py [-h] [-l LINK] [-p PLAYLIST] [-s]
+
+Youtube video download tool
+
+optional arguments:
+  -h, --help            Show this help message and exit
+  -l LINK, --link LINK  Single youtube video to download
+  -p PLAYLIST, --playlist PLAYLIST
+                        Youtube playlist url to download all videos
+  -s, --sec             All sec-talk videos
+
+
