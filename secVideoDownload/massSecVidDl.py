@@ -14,7 +14,7 @@
 import urllib2, re, signal
 from pytube import YouTube
 from pprint import pprint
-import sys, unicodedata
+import sys, unicodedata, time
 import urlparse, argparse
 from BeautifulSoup import BeautifulSoup
 
@@ -33,7 +33,6 @@ def secYTLinks():
                 playlistLinks.append(unicodedata.normalize('NFKD', currTag).encode('ascii','ignore'))
     return playlistLinks
 
-playlists = secYTLinks()
 def getPLUrls(url):
     sTUBE = ''
     cPL = ''
@@ -78,13 +77,11 @@ def downloadVideo(url):
         print "(+) URL: %s" %url
         print "(+) Resolution: %s" %higMp4Res
         video = yt.get('mp4', higMp4Res)
-        userAnswer = raw_input('(+) Want to download?[y/n] ').lower()
-        if userAnswer == 'n' or userAnswer == 'N':
-           print "(+) Skipping"
-        if userAnswer == 'y' or userAnswer == 'Y':
-            print "(+) Downloading video"
-            video.download('.')
-            print "(+) Download complete"
+        print "(+) Downloading video"
+        start_time = time.time()
+        video.download('.')
+        print "(+) Download complete"
+        print("(+) Download Time: %s sec" % round((time.time() - start_time), 2))
     except Exception as e:
         print "(-) Error: %s" %e
 
@@ -94,6 +91,7 @@ def signal_handler(signal, frame):
 signal.signal(signal.SIGINT, signal_handler)
 
 def downloadAllSec():
+    playlists = secYTLinks()
     vidListFinal = []
     for eachPL in playlists:
         eachVidList = getPLUrls(eachPL)
