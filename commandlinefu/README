@@ -1,4 +1,4 @@
-This script will give you random commands/tricks from http://www.commandlinefu.com. I use it to send me an email an email with them everyday so you learn something new you have probably not seen before. 
+This script will give you random commands/tricks from http://www.commandlinefu.com. I use it to send me an email with them everyday so you learn something new you have probably not seen before. 
 
 root@M14x-R2$ ./commandlinefu.py
 
