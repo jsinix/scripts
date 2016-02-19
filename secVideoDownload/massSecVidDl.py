@@ -1,4 +1,5 @@
 #!/usr/bin/python
+from __future__ import unicode_literals
 
 # Disclaimer: This script is only for educational purposes.
 # Please use this at your own risk.
@@ -15,7 +16,7 @@ import urllib2, re, signal
 from pytube import YouTube
 from pprint import pprint
 import sys, unicodedata, time
-import urlparse, argparse
+import urlparse, argparse, youtube_dl
 from BeautifulSoup import BeautifulSoup
 
 def secYTLinks():
@@ -26,8 +27,6 @@ def secYTLinks():
     directLinks = []
     for tag in soup.findAll('a', href=True):
         currTag = urlparse.urljoin(awesomeSecTalks, tag['href'])
-        #tag['href'] = urlparse.urljoin(awesomeSecTalks, tag['href'])
-        #currTag = tag['href']
         if 'youtube' in currTag:
             if 'playlist?list' in currTag:
                 playlistLinks.append(unicodedata.normalize('NFKD', currTag).encode('ascii','ignore'))
@@ -67,21 +66,35 @@ def getPLUrls(url):
         sys.exit()
     return final_url
 
-def downloadVideo(url):
+def downloadVideo(url, codec):
     try:
-        yt = YouTube(url)
-        vidName = str(yt.filename)
-        allVidFormat = yt.get_videos()
-        higMp4Res = str(yt.filter('mp4')[-1]).split()[-3]
-        print "\n(+) Name: %s" %vidName
-        print "(+) URL: %s" %url
-        print "(+) Resolution: %s" %higMp4Res
-        video = yt.get('mp4', higMp4Res)
-        print "(+) Downloading video"
-        start_time = time.time()
-        video.download('.')
-        print "(+) Download complete"
-        print("(+) Download Time: %s sec" % round((time.time() - start_time), 2))
+	yt = YouTube(url)
+	vidName = str(yt.filename)
+	start_time = time.time()
+	if codec == 0:
+	    print "(+) Codec: MP4"
+            allVidFormat = yt.get_videos()
+            higMp4Res = str(yt.filter('mp4')[-1]).split()[-3]
+            print "\n(+) Name: %s" %vidName
+            print "(+) URL: %s" %url
+            print "(+) Resolution: %s" %higMp4Res
+            video = yt.get('mp4', higMp4Res)
+            print "(+) Downloading video"
+            video.download('.')
+            print "(+) Download complete"
+	if codec == 1:
+	    print "[youtube] Codec: MP3"
+	    ydl = youtube_dl.YoutubeDL()
+	    r = ydl.extract_info(url, download=False)	
+	    options = {'format': 'bestaudio/best', 'extractaudio' : True, 'audioformat' : "best", 'outtmpl': r['title'], 'noplaylist' : True,} 
+	    print "[youtube] Name: %s" % (vidName)
+	    print "[youtube] Uploaded by: %s" % (r['uploader'])
+	    print "[youtube] Likes: %s | Dislikes: %s" % (r['like_count'], r['dislike_count'])
+	    print "[youtube] Views: %s" % (r['view_count']) 
+	    with youtube_dl.YoutubeDL(options) as ydl:
+	        ydl.download([url])
+	    print("[youtube] Download Time: %s sec" % round((time.time() - start_time), 2))
+	    print ""	
     except Exception as e:
         print "(-) Error: %s" %e
 
@@ -103,18 +116,16 @@ def downloadAllSec():
         print "(+) Exiting"
         sys.exit()
     for eachVid in vidListFinalUnique:
-        downloadVideo(eachVid)
+        downloadVideo(eachVid, 0)
 
 def process_arguments(args):
     parser = argparse.ArgumentParser(description="Youtube video download tool")
     parser.add_argument('-l',
                         '--link',
-                        #action='store_true',
                         help="Single youtube video to download"
                         )
     parser.add_argument('-p',
                         '--playlist',
-                        #action='store_true',
                         help='Youtube playlist url to download all videos'
                         )
     parser.add_argument('-s',
@@ -122,11 +133,21 @@ def process_arguments(args):
                         action='store_true',
                         help='All sec-talk videos'
                         )
+    parser.add_argument('-m',
+                        '--mp3',
+                        action='store_true',
+                        help='Download as MP3'
+                        )    
     options = parser.parse_args(args)
     return vars(options)
 if len(sys.argv) < 2:
     process_arguments(['-h'])
 userOptions = process_arguments(sys.argv[1:])
+
+if userOptions["mp3"] == True:
+    globcodec = 1
+if userOptions["mp3"] == False:
+    globcodec = 0
 
 if userOptions["sec"] == True:
     downloadAllSec()
@@ -142,11 +163,11 @@ if userOptions["playlist"] != None:
         print "(+) Exiting"
         sys.exit()
     for eachLink in vidListUnique:
-        downloadVideo(eachLink)
+        downloadVideo(eachLink, globcodec)
     print "(+) Exiting"
     sys.exit()
 if userOptions["link"] != None:
     vidLink = userOptions["link"]
-    downloadVideo(vidLink)
+    downloadVideo(vidLink, globcodec)
     print "(+) Exiting"
     sys.exit()

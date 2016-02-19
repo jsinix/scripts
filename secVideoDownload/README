@@ -1,4 +1,4 @@
-This script can be used to download youtube videos[singles and playlists]. Apart from that you can also directly download the SecTalks indexed here https://github.com/PaulSec/awesome-sec-talks 
+This script can be used to download youtube videos[singles and playlists] or just as MP3. Apart from that you can also directly download the SecTalks indexed here https://github.com/PaulSec/awesome-sec-talks
 
 Usage: massSecVidDl.py [-h] [-l LINK] [-p PLAYLIST] [-s]
 
@@ -10,5 +10,5 @@ optional arguments:
   -p PLAYLIST, --playlist  PLAYLIST
                            Youtube playlist url to download all videos
   -s, --sec                All sec-talk videos
-
+  -m, --mp3                Download as MP3
 
