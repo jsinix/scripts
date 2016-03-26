@@ -81,7 +81,7 @@ def controller():
 	    print "(-) Directory %s exist" %(base_storage+cdir)
 	
 	for fname, furl in cdetail.iteritems():
-	    userAnswer = raw_input('(+) Start download?[y/n] ').lower()
+	    dl_file(furl, base_storage+cdir+'/')	
         print "\n"
 
 def signal_handler(signal, frame):
