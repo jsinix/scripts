@@ -1,6 +1,7 @@
 #!/usr/bin/python2.7
-import requests, signal, os, sys, urllib2
+import requests, signal, os, sys
 from BeautifulSoup import BeautifulSoup
+import wget, urllib2
 
 base_url = "https://www.udacity.com/courses/all"
 base_storage = "/mnt/storage/media/Udacity/"
@@ -12,10 +13,7 @@ def dl_file(dl_url, dl_path):
         if os.path.exists(dl_file_path) == False:
 	    print "(-) Downloading %s" %dl_fname
 	    print "(-) %s" %str(dl_url)
-            dlhandle = urllib2.urlopen(str(dl_url))
-	    data = dlhandle.read()
-	    with open(dl_file_path, "wb") as code:
-	        code.write(data)
+	    filename = wget.download(dl_url)
         else:
 	    print "(-) %s already exist" %dl_fname
 	    print "(-) %s" %dl_url
@@ -81,6 +79,8 @@ def controller():
 	    print "(-) Directory %s exist" %(base_storage+cdir)
 	
 	for fname, furl in cdetail.iteritems():
+	    os.chdir(base_storage+cdir+'/')
+	    print "(-) Directory changed to %s" %base_storage+cdir+'/'
 	    dl_file(furl, base_storage+cdir+'/')	
         print "\n"
 
