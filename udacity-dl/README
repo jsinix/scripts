@@ -1,1 +1,15 @@
 This program will download all indexed videos from udacity. All videos will be arranged in their respective course directories. 
+
+[jsinix@cerberus udacity-dl]$ ./udacity-dl.py
+(+) Course name: Intro to Java Programming
+(-) Course link: https://www.udacity.com/course/intro-to-java-programming--cs046
+(-) Course dl: https://www.udacity.com/wiki/cs046/downloads
+(-) Total Files: 14
+(-) Directory /mnt/storage/media/Udacity/Intro_to_Java_Programming created
+(-) Directory changed to /mnt/storage/media/Udacity/Intro_to_Java_Programming/
+(-) Downloading Lesson_8.zip
+(-) http://video.udacity-data.com/zip/cs046/Lesson_8.zip
+100% [...................................................] 274511556 / 274511556
+(-) Directory changed to /mnt/storage/media/Udacity/Intro_to_Java_Programming/
+(-) Downloading Lesson_6.2_-_Loops.zip
+[trimmed...]
