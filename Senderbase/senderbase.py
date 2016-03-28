@@ -26,52 +26,50 @@ determine a "reputation score" for any IP address. This information includes:
 Reference: http://www.cisco.com/c/en/us/support/docs/security/email-security-appliance/118380-technote-esa-00.html
 """
 
-baseUrl = "http://api.statdns.com/"
-def queryDNSmx(urlToParse):
+def getmx(domin):
     try:
         ipArr = []
-        data = json.load(urllib2.urlopen(urlToParse))
-        for eachEntry in range(len(data['answer'])):
-            ipArr.append(str(data['answer'][eachEntry]['rdata'].split()[-1]).translate(None, '"'))
+        answers = dns.resolver.query(domin, 'MX')
+        for rdata in answers:
+            ipArr.append(str(rdata.exchange))
         return ipArr
     except Exception as e:
         return None
 
-def queryDNSarec(urlToParse):
+def getarec(hostfqdn):
+    hostfqdnResolved = ''
     try:
-        data = json.load(urllib2.urlopen(urlToParse))
-        for eachEntry in range(len(data['answer'])):
-            return str(data['answer'][eachEntry]['rdata']).translate(None, '"')
+        hostfqdnResolved = socket.gethostbyname(str(hostfqdn))
     except Exception as e:
-        return None
+        print e
+        hostfqdnResolved = None
+    return hostfqdnResolved
 
-def returnDomain(simIP):
+def returndomain(simIP):
     ipaddrArrRev = '.'.join(reversed(simIP.split('.')))
     return ipaddrArrRev  + ".rf-adfe2ko9.senderbase.org"
 
-def queryDNS(urlToParse):
+def gettxt(domin):
     try:
-        data = json.load(urllib2.urlopen(urlToParse))
-        for eachEntry in range(len(data['answer'])):
-            return str(data['answer'][eachEntry]['rdata']).translate(None, '"')
-    except Exception as e:
+        answers = dns.resolver.query(domin, 'TXT')
+        for rdata in answers:
+            return rdata
+    except Exception as err:
         return None
 
 def process_arguments(args):
     parser = argparse.ArgumentParser(description="Senderbase score query")
     parser.add_argument('-i',
                         '--ip',
-                        #required=True,
                         help="IP address to query"
                         )
     parser.add_argument('-d',
                         '--domain',
-                        #required=True,
                         help="Domain name to query"
                         )
     parser.add_argument('-w',
                         '--wiki',
-                        #required=True,
+                        action='store_true',
                         help="Wiki for this tool"
                         )
     options = parser.parse_args(args)
@@ -82,19 +80,15 @@ if len(sys.argv) < 2:
 userOptions = process_arguments(sys.argv[1:])
 
 if userOptions["ip"] != None:
-    userIP = userOptions["ip"]
-    sbrsScore = queryDNS(baseUrl + returnDomain(userIP) + "/txt")
-    print "IP: %s\tScore: %s" %(userIP, sbrsScore)
+    print "IP: %s\tScore: %s" %(userOptions["ip"], str(gettxt(returndomain(userOptions["ip"]))).replace('"', ''))
 
 if userOptions["domain"] != None:
     userDomain = userOptions["domain"]
-    allMX = queryDNSmx(baseUrl + userDomain + "/mx")
-    if allMX != None:
-        for eachMx in allMX:
-            currMxDomain = eachMx
-            currMxIp = queryDNSarec(baseUrl + eachMx + "/a")
-            currSbrs = queryDNS(baseUrl + returnDomain(currMxIp) + "/txt")
-            print "MX: %s\tIP: %s\tScore: %s" %(currMxDomain, currMxIp, currSbrs)
+    allmx = getmx(userDomain)
+    if allmx != None:
+        for eachmx in allmx:
+            tempdom = returndomain(getarec(eachmx))
+            print "MX: %s\tIP: %s\tScore: %s" %(eachmx[:-1], getarec(eachmx), str(gettxt(returndomain(getarec(eachmx)))).replace('"', ''))
 
 if userOptions["wiki"] != None:
     print helpMsg
