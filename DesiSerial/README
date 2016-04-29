@@ -1,0 +1,12 @@
+Download latest drama's from http://www.desiserials.tv
+
+usage: desiserials.py [-h] [-t] [-d DATE]
+
+CLI tool to download indian drama's
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -t, --today           Download all serials released today
+  -d DATE, --date DATE  Regex date:month:year
+
+
