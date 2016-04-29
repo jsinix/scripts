@@ -11,7 +11,7 @@ today_dl = []
 all_serials = ['http://www.desiserials.tv/watch-online/star-plus/mere-angne-mein/', 'http://www.desiserials.tv/watch-online/star-plus/diya-aur-baati-hum-star-plus/', 'http://www.desiserials.tv/watch-online/star-plus/saath-nibhana-saathiya-star-plus/', 'http://www.desiserials.tv/watch-online/star-plus/silsila-pyaar-ka-star/', 'http://www.desiserials.tv/watch-online/star-plus/dehleez/', 'http://www.desiserials.tv/watch-online/star-plus/yeh-hai-mohabbatein-star-plus/']
 
 def dl_videos(link1):
-    os.chdir('/mnt/jsinixcollector/Movies/04 Other/Drama/StarPlus')
+    os.chdir('/path/to/directory/')
     commd = 'youtube-dl -f 1 ' + link1
     os.system(commd)
 
