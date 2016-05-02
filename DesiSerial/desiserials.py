@@ -1,16 +1,24 @@
 #!/usr/bin/python2.7
 
-from __future__ import unicode_literals
+#from __future__ import unicode_literals
 import requests, datetime, os, youtube_dl
-import time, argparse, sys, signal
+import time, argparse, sys, signal, ssl
 from BeautifulSoup import BeautifulSoup
 now = datetime.datetime.now()
 today_serial = []
 today_dl = []
 
+signature = """________       _____       _____        
+______(_)_________(_)_________(_)___  __
+_____  /__  ___/_  /__  __ \_  /__  |/_/
+____  / _(__  )_  / _  / / /  / __>  <  
+___  /  /____/ /_/  /_/ /_//_/  /_/|_|  
+/___/           jsinix.1337@gmail.com """
+
 # This defines the quality of video to download
 ydl_opts = {
     'format': '1',
+	'nocheckcertificate': '1',
 }
 
 # All the serials that have to be downloaded
@@ -42,7 +50,7 @@ def get_today_episode(url1, dayii, monthii, yearii):
     mysoup1 = BeautifulSoup(req1.content)
     all_links_serialx = mysoup1.findAll('div', {'class': 'ten columns omega blog-3'})
     for eachepisode in all_links_serialx:
-        name1 = str(eachepisode.findAll('div', {'class': 'post bottom'})[0].find('h2').find('a').text).lower()
+        name1 = unicode(eachepisode.findAll('div', {'class': 'post bottom'})[0].find('h2').find('a').text).lower()
         link1 = eachepisode.findAll('div', {'class': 'post bottom'})[0].find('h2').find('a').get('href')
 	if yearii in name1:
 	    if monthii in name1:
@@ -64,14 +72,8 @@ def controller(dayi, monthi, yeari):
     for elink in today_dl:
 	dl_videos(elink)
 
-print "\nThe Indian Dramas:" 
-print "[Mere Angne Mein] [Diya Aur Baati Hum]"
-print "[Saath Nibhana Saathiya] [Silsila Pyaar Ka Star]"
-print "[Dehleez] [Yeh Hai Mohabbatein]"
-print '\n'
-
 def process_arguments(args):
-    parser = argparse.ArgumentParser(description="CLI tool to download indian drama's")
+    parser = argparse.ArgumentParser(description="CLI tool to download Indian Drama's")
     parser.add_argument('-t',
                         '--today',
 		        action='store_true',
@@ -86,6 +88,19 @@ def process_arguments(args):
 if len(sys.argv) < 2:
     process_arguments(['-h'])
 userOptions = process_arguments(sys.argv[1:])
+
+print "\n"
+print signature
+print '\n'
+print " ---------------------------"
+print "| Indian Dramas:            |" 
+print "|  * Mere Angne Mein        |"
+print "|  * Diya Aur Baati Hum     |"
+print "|  * Saath Nibhana Saathiya |"
+print "|  * Silsila Pyaar Ka Star  |"
+print "|  * Dehleez                |"
+print "|  * Yeh Hai Mohabbatein    |"
+print ' ---------------------------\n'
 
 if userOptions["today"] == True:
     day = str(now.day)
