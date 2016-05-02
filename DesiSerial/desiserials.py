@@ -1,19 +1,33 @@
 #!/usr/bin/python2.7
 
-import requests, datetime, os
-import time, argparse, sys
+from __future__ import unicode_literals
+import requests, datetime, os, youtube_dl
+import time, argparse, sys, signal
 from BeautifulSoup import BeautifulSoup
 now = datetime.datetime.now()
 today_serial = []
 today_dl = []
 
+# This defines the quality of video to download
+ydl_opts = {
+    'format': '1',
+}
+
 # All the serials that have to be downloaded
 all_serials = ['http://www.desiserials.tv/watch-online/star-plus/mere-angne-mein/', 'http://www.desiserials.tv/watch-online/star-plus/diya-aur-baati-hum-star-plus/', 'http://www.desiserials.tv/watch-online/star-plus/saath-nibhana-saathiya-star-plus/', 'http://www.desiserials.tv/watch-online/star-plus/silsila-pyaar-ka-star/', 'http://www.desiserials.tv/watch-online/star-plus/dehleez/', 'http://www.desiserials.tv/watch-online/star-plus/yeh-hai-mohabbatein-star-plus/']
 
+def signal_handler(signal, frame):
+    print('You pressed Ctrl+C!')
+    sys.exit(0)
+
 def dl_videos(link1):
-    os.chdir('/path/to/directory/')
-    commd = 'youtube-dl -f 1 ' + link1
-    os.system(commd)
+    # Uncomment this if you want the files to be stored in different directory e.g NAS etc
+    #os.chdir('/path/to/directory/')
+
+    #commd = 'youtube-dl -f 1 ' + link1
+    #os.system(commd)
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+	ydl.download([link1])
 
 def dl_link(url2):
     req2 = requests.get(url2)
@@ -36,6 +50,7 @@ def get_today_episode(url1, dayii, monthii, yearii):
 		    today_serial.append(str(link1))	
 
 def controller(dayi, monthi, yeari):
+    signal.signal(signal.SIGINT, signal_handler)
     for eachSerial in all_serials:
         try:
             get_today_episode(eachSerial, dayi, monthi, yeari)
@@ -48,6 +63,12 @@ def controller(dayi, monthi, yeari):
 	    print err
     for elink in today_dl:
 	dl_videos(elink)
+
+print "\nThe Indian Dramas:" 
+print "[Mere Angne Mein] [Diya Aur Baati Hum]"
+print "[Saath Nibhana Saathiya] [Silsila Pyaar Ka Star]"
+print "[Dehleez] [Yeh Hai Mohabbatein]"
+print '\n'
 
 def process_arguments(args):
     parser = argparse.ArgumentParser(description="CLI tool to download indian drama's")
