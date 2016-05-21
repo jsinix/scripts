@@ -1,9 +1,9 @@
 Download latest drama's from http://www.desiserials.tv
 
+The practical way to use this script  would be to add it into an hourly crontab. And add the directory where the videos are stored into you plex library. Doing so you have your own/personal desi netflix[ish]. 
+
 usage: desiserials.py [-h] [-t] [-d DATE]
-
 CLI tool to download indian drama's
-
 optional arguments:
   -h, --help            show this help message and exit
   -t, --today           Download all serials released today
