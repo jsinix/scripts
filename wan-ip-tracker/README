@@ -1,0 +1,1 @@
+Like most home internet connections, I dont have a static IP and it changes occasionally. I wrote this script to keep track of the IP addresses that are assigned to me by my ISP and the timeframe. Hopefully with some database collected, i might be able to find some pattern. 
