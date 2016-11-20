@@ -54,21 +54,29 @@ def rssparser(pcast):
 		error = err	
     return linkarr
 
-for eachpcast in urlmap.keys():
-    print "(+) Podcast: %s" %pcastname.get(eachpcast)
-    dir = base + eachpcast
-    pcastlink = rssparser(eachpcast)
+def controller():
+    for eachpcast in urlmap.keys():
+        print "(+) Podcast: %s" %pcastname.get(eachpcast)
+        dir = base + eachpcast
+        pcastlink = rssparser(eachpcast)
 
-    if os.path.isdir(dir) == False:
-	try:
-	    os.makedirs(dir)
-	    print "(+) Directory created: %s" %dir
-	except Exception as err:
-	    print "(-) %s" %err
+        if os.path.isdir(dir) == False:
+	    try:
+	        os.makedirs(dir)
+	        print "(+) Directory created: %s" %dir
+	    except Exception as err:
+	        print "(-) %s" %err
  
-    for each in pcastlink:
-        try:
-            dload(each, dir)
-	except Exception as err:
-	    print err
-    print "\n\n"
+        for each in pcastlink:
+            try:
+                dload(each, dir)
+	    except Exception as err:
+	        print err
+        print "\n\n"
+
+def signal_handler(signal, frame):
+    print('You pressed Ctrl+C!')
+    sys.exit(0)
+
+signal.signal(signal.SIGINT, signal_handler)
+controller()
